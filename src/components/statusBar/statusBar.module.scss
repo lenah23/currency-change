@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.status-bar {
+  @include flexStyles(flex, row, space-between, center);
+  gap: 16px;
+
+  .last-update {
+    @include textStyles(
+      "Inter, sans-serif",
+      $fz-12,
+      $medium,
+      100%,
+      $subtitle,
+      left
+    );
+
+    @include flexStyles(flex, row, center, center);
+    gap: 6px;
+  }
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,20 @@
+@import "../../styles/_variables";
+@import "../../styles/_mixins";
+
+.customBtn {
+  border: none;
+  border-radius: 8px;
+  @include padding(4px, 8px, 4px, 8px);
+  @include textStyles(
+    "Inter, sans-serif",
+    $fz-12,
+    $semiBold,
+    100%,
+    inherit,
+    center
+  );
+  @include flexStyles(flex, row, center, center);
+  gap: 4px;
+
+  cursor: pointer;
+}
