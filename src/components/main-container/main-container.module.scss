@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.main-container {
+  padding: 10px;
+  &__title {
+    @include textStyles(
+      '"inter", sans-serif',
+      $fz-32,
+      $semiBold,
+      32px,
+      $main-title,
+      center
+    );
+    margin-bottom: 10px;
+  }
+
+  &__subtitle {
+    @include textStyles(
+      '"inter", sans-serif',
+      $fz-14,
+      $medium,
+      100%,
+      $subtitle,
+      center
+    );
+    margin-bottom: 30px;
+  }
+}

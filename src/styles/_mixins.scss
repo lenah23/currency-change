@@ -1,4 +1,4 @@
-@mixin size($width, $height) {
+@mixin sizes($width, $height) {
   width: $width;
   height: $height;
 }
@@ -10,10 +10,25 @@
   align-items: $align-items;
 }
 
-@mixin textStyles($font-size, $font-weight, $line-height, $color, $text-align) {
+@mixin textStyles(
+  $font-family,
+  $font-size,
+  $font-weight,
+  $line-height,
+  $color,
+  $text-align
+) {
+  font-family: $font-family;
   font-size: $font-size;
   font-weight: $font-weight;
   line-height: $line-height;
   color: $color;
   text-align: $text-align;
+}
+
+@mixin padding($padding-top, $padding-right, $padding-bottom, $padding-left) {
+  padding-top: $padding-top;
+  padding-right: $padding-right;
+  padding-bottom: $padding-bottom;
+  padding-left: $padding-left;
 }
