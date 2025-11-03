@@ -1,0 +1,26 @@
+@import "../../styles/_variables";
+@import "../../styles/_mixins";
+
+.currency-input__container {
+  @include flexStyles(flex, column, center, start);
+  gap: 8px;
+
+  .currency-input {
+    width: 100%;
+    @include padding(12px, 0, 12px, 0);
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid $border-color;
+  }
+
+  .error-message {
+    @include textStyles(
+      '"inter", sans-serif',
+      $fz-12,
+      $regular,
+      100%,
+      $error-red,
+      left
+    );
+  }
+}

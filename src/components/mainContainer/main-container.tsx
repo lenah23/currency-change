@@ -1,4 +1,4 @@
-import { StatusBar } from "../index";
+import { CurrencyConvertPannel, StatusBar } from "../index";
 import styles from "./main-container.module.scss";
 
 const ConverterMainContainer: React.FC = () => {
@@ -9,6 +9,7 @@ const ConverterMainContainer: React.FC = () => {
         Get real-time exchange rates
       </h3>
       <StatusBar />
+      <CurrencyConvertPannel />
     </div>
   );
 };

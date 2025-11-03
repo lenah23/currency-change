@@ -4,6 +4,8 @@
 .status-bar {
   @include flexStyles(flex, row, space-between, center);
   gap: 16px;
+  margin: 0 auto 30px;
+  width: fit-content;
 
   .last-update {
     @include textStyles(

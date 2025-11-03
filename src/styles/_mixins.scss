@@ -32,3 +32,10 @@
   padding-bottom: $padding-bottom;
   padding-left: $padding-left;
 }
+
+@mixin margin($margin-top, $margin-right, $margin-bottom, $margin-left) {
+  margin-top: $margin-top;
+  margin-right: $margin-right;
+  margin-bottom: $margin-bottom;
+  margin-left: $margin-left;
+}

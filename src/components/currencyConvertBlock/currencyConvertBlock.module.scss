@@ -1,0 +1,22 @@
+@import "../../styles/_variables";
+@import "../../styles/_mixins";
+
+.currency-convert__container {
+  min-width: 614px;
+  padding: 20px;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+
+  .amount-input__label {
+    display: block;
+    @include textStyles(
+      '"inter", sans-serif',
+      $fz-12,
+      $semiBold,
+      100%,
+      $main-title,
+      left
+    );
+    margin-bottom: 8px !important;
+  }
+}

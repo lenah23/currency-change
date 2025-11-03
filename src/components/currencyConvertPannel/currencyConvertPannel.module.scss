@@ -1,0 +1,7 @@
+@import "../../styles/_variables";
+@import "../../styles/_mixins";
+
+.currency-convert__pannel {
+  @include flexStyles(flex, row, center, center);
+  gap: 30px;
+}
