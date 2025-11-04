@@ -21,52 +21,5 @@
     margin-bottom: 8px;
   }
 
-  .currency-info__container {
-    min-width: 254px;
-    border: 1px solid $border-color;
-    border-radius: 8px;
-    @include padding(6px, 8px, 6px, 8px);
-    background-color: $bg-light;
-    @include flexStyles(flex, row, start, center);
-    gap: 12px;
-
-    .currency-symbol {
-      @include sizes(30px, 30px);
-      border-radius: 50%;
-      border: 1px solid $border-light-blue;
-      background-color: $bg-light-blue;
-      @include flexStyles(flex, row, center, center);
-      overflow: hidden;
-      text-align: center;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .currency-info {
-      @include flexStyles(flex, column, start, start);
-      gap: 2px;
-
-      &__code {
-        @include textStyles(
-          "'Inter', sans-serif",
-          $fz-14,
-          $semiBold,
-          100%,
-          $main-title,
-          left
-        );
-      }
-
-      &__name {
-        @include textStyles(
-          "'Inter', sans-serif",
-          $fz-12,
-          $regular,
-          100%,
-          $subtitle,
-          left
-        );
-      }
-    }
-  }
+  
 }

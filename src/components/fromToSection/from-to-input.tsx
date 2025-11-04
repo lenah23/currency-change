@@ -1,4 +1,5 @@
 import styles from "./fromToSection.module.scss";
+import { CurrencyItem } from "../index";
 
 interface IProps {
   setIsSwapped: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,15 +11,7 @@ const FromToInput: React.FC<IProps> = (props) => {
   return (
     <div className={styles["from-to-input"]}>
       <label className={styles["from-to-input__label"]}>{label}</label>
-      <div className={styles["currency-info__container"]}>
-        <div className={styles["currency-symbol"]}>$</div>
-        <div className={styles["currency-info"]}>
-          <div className={styles["currency-info__code"]}>USD</div>
-          <div className={styles["currency-info__name"]}>
-            United States Dollar
-          </div>
-        </div>
-      </div>
+      <CurrencyItem />
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import Button from "./button/button";
 import StatusBar from "./statusBar/statusBar";
+import CurrencyItem from "./currency/currencyItem";
+import CurrencyList from "./currency/currencyList";
 import FromToInput from "./fromToSection/from-to-input";
 import FromToSection from "./fromToSection/fromToSection";
 import ConverterMainContainer from "./mainContainer/main-container";
@@ -12,6 +14,8 @@ export {
   Button,
   StatusBar,
   FromToInput,
+  CurrencyItem,
+  CurrencyList,
   FromToSection,
   ConversionResults,
   CurrencyConvertBlock,
