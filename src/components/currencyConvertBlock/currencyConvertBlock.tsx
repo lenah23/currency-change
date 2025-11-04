@@ -1,4 +1,4 @@
-import { CurrencyExchangeInput } from "../index";
+import { CurrencyExchangeInput, FromToSection } from "../index";
 import styles from "./currencyConvertBlock.module.scss";
 
 interface IProps {
@@ -11,6 +11,7 @@ const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
   return (
     <div className={styles["currency-convert__container"]}>
       <CurrencyExchangeInput value={inputValue} setValue={setInputValue} />
+      <FromToSection />
     </div>
   );
 };
