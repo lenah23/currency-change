@@ -4,6 +4,7 @@ import CurrencyItem from "./currency/currencyItem";
 import CurrencyList from "./currency/currencyList";
 import FromToInput from "./fromToSection/from-to-input";
 import FromToSection from "./fromToSection/fromToSection";
+import CurrencyModal from "./currencyModal/currencyModal";
 import ConverterMainContainer from "./mainContainer/main-container";
 import ConversionResults from "./conversionResults/conversionResults";
 import CurrencyConvertBlock from "./currencyConvertBlock/currencyConvertBlock";
@@ -17,6 +18,7 @@ export {
   CurrencyItem,
   CurrencyList,
   FromToSection,
+  CurrencyModal,
   ConversionResults,
   CurrencyConvertBlock,
   CurrencyConvertPannel,
