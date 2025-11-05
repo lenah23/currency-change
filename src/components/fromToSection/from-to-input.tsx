@@ -1,3 +1,4 @@
+import type { ICurrencyDataItem } from "../../interfaces";
 import { CurrencyItem, CurrencyModal } from "../index";
 import styles from "./fromToSection.module.scss";
 
@@ -9,15 +10,16 @@ interface IProps {
   handleCloseModal: () => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
+  filteredCurrencies: ICurrencyDataItem[]
 }
 
 const FromToInput: React.FC<IProps> = (props) => {
-  const { label, handleOpenModal, handleCloseModal, searchValue, setSearchValue } = props;
+  const { label, handleOpenModal, handleCloseModal, searchValue, setSearchValue, filteredCurrencies } = props;
   return (
     <>
       <div className={styles["from-to-input"]} onClick={handleOpenModal}>
         <label className={styles["from-to-input__label"]}>{label}</label>
-        <CurrencyItem />
+        {/* <CurrencyItem currencyItem={}/> */}
       </div>
       <CurrencyModal
         openModal={props.openModal}
@@ -25,6 +27,7 @@ const FromToInput: React.FC<IProps> = (props) => {
         handleCloseModal={handleCloseModal}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        filteredCurrencies={filteredCurrencies}
       />
     </>
   );

@@ -1,13 +1,22 @@
+import type { ICurrencyDataItem } from "../../interfaces";
 import styles from "./currency.module.scss";
 
-const CurrencyItem: React.FC = () => {
+interface IProps {
+  currencyItem: ICurrencyDataItem;
+}
+
+const CurrencyItem: React.FC<IProps> = (props) => {
   return (
     <div className={styles["currency-info__container"]}>
-      <div className={styles["currency-symbol"]}>$</div>
+      <div className={styles["currency-symbol"]}>
+        {props.currencyItem.symbol}
+      </div>
       <div className={styles["currency-info"]}>
-        <div className={styles["currency-info__code"]}>USD</div>
+        <div className={styles["currency-info__code"]}>
+          {props.currencyItem.code}
+        </div>
         <div className={styles["currency-info__name"]}>
-          United States Dollar
+          {props.currencyItem.name}
         </div>
       </div>
     </div>

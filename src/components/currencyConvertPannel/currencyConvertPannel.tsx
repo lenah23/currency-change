@@ -11,6 +11,7 @@ const CurrencyConvertPannel: React.FC = () => {
     setSearchValue,
     handleOpenModal,
     handleCloseModal,
+    filteredCurrencies
   } = UseCurrencyConvertPannelHooks();
 
   return (
@@ -23,6 +24,7 @@ const CurrencyConvertPannel: React.FC = () => {
         handleOpenModal={handleOpenModal}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        filteredCurrencies={filteredCurrencies}
       />
       <ConversionResults />
     </div>

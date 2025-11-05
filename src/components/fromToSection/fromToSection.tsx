@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FromToInput } from "../index";
 import switchIcon from "../../assets/icons/switch-icon.svg";
 import styles from "./fromToSection.module.scss";
+import type { ICurrencyDataItem } from "../../interfaces";
 
 interface IProps {
   inputValue: number;
@@ -11,6 +12,7 @@ interface IProps {
   setInputValue: (value: number) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
+  filteredCurrencies: ICurrencyDataItem[]
 }
 
 const FromToSection: React.FC<IProps> = (props) => {
@@ -21,6 +23,7 @@ const FromToSection: React.FC<IProps> = (props) => {
     setSearchValue,
     handleOpenModal,
     handleCloseModal,
+    filteredCurrencies
   } = props;
 
   return (
@@ -35,6 +38,7 @@ const FromToSection: React.FC<IProps> = (props) => {
             handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
+            filteredCurrencies={filteredCurrencies}
           />
           <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
           <FromToInput
@@ -45,6 +49,7 @@ const FromToSection: React.FC<IProps> = (props) => {
             handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
+            filteredCurrencies={filteredCurrencies}
           />
         </>
       ) : (
@@ -57,6 +62,7 @@ const FromToSection: React.FC<IProps> = (props) => {
             handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
+            filteredCurrencies={filteredCurrencies}
           />
           <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
           <FromToInput
@@ -67,6 +73,7 @@ const FromToSection: React.FC<IProps> = (props) => {
             handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
+            filteredCurrencies={filteredCurrencies}
           />
         </>
       )}

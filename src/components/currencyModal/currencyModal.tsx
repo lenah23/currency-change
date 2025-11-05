@@ -7,6 +7,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import searchIcon from "../../assets/icons/search-icon.svg";
 import styles from "./currencyModal.module.scss";
+import type { ICurrencyDataItem } from "../../interfaces";
+import { CurrencyList } from "../index";
 
 interface IProps {
   openModal: boolean;
@@ -14,12 +16,19 @@ interface IProps {
   handleCloseModal: () => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
+  filteredCurrencies: ICurrencyDataItem[];
 }
 
 const currencyModal: React.FC<IProps> = (props: IProps) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const { searchValue, setSearchValue, handleCloseModal, openModal } = props;
+  const {
+    searchValue,
+    setSearchValue,
+    handleCloseModal,
+    openModal,
+    filteredCurrencies,
+  } = props;
 
   return (
     <React.Fragment>
@@ -43,21 +52,24 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
             Choose a currency from the list below or use the search bar to find
             a specific currency.
           </h4>
+          <div style={{ position: "relative", width: "100%" }}>
+            <span className={styles["search-icon__container"]}>
+              <img src={searchIcon} alt="Search" width={18} height={18} />
+            </span>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder="Search currency..."
+              className={styles["search-currency__input"]}
+            />
+          </div>
         </DialogTitle>
 
         <DialogContent>
           <DialogContentText>
-            <div style={{ position: "relative", width: "100%" }}>
-              <span className={styles["search-icon__container"]}>
-                <img src={searchIcon} alt="Search" width={18} height={18} />
-              </span>
-              <input
-                type="text"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Search currency..."
-                className={styles["search-currency__input"]}
-              />
+            <div className={styles["currencyLst"]}>
+              <CurrencyList currencyList={filteredCurrencies} />
             </div>
           </DialogContentText>
         </DialogContent>

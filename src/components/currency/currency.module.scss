@@ -3,6 +3,7 @@
 
 .currency-info__container {
   min-width: 254px;
+  width: 100%;
   border: 1px solid $border-color;
   border-radius: 8px;
   @include padding(6px, 8px, 6px, 8px);
@@ -48,4 +49,9 @@
       );
     }
   }
+}
+
+.currency-list__container {
+  @include flexStyles(flex, column, start, start);
+  gap: 8px;
 }
