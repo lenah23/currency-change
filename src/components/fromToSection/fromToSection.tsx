@@ -6,25 +6,15 @@ import type { ICurrencyDataItem } from "../../interfaces";
 
 interface IProps {
   inputValue: number;
-  openModal: boolean;
-  handleCloseModal: () => void;
-  handleOpenModal: () => void;
   setInputValue: (value: number) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[]
+  filteredCurrencies: ICurrencyDataItem[];
 }
 
 const FromToSection: React.FC<IProps> = (props) => {
   const [isSwapped, setIsSwapped] = useState<boolean>(false);
-  const {
-    openModal,
-    searchValue,
-    setSearchValue,
-    handleOpenModal,
-    handleCloseModal,
-    filteredCurrencies
-  } = props;
+  const { searchValue, setSearchValue, filteredCurrencies } = props;
 
   return (
     <div className={styles["from-to-section"]}>
@@ -33,9 +23,6 @@ const FromToSection: React.FC<IProps> = (props) => {
           <FromToInput
             setIsSwapped={setIsSwapped}
             label={"From"}
-            openModal={openModal}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             filteredCurrencies={filteredCurrencies}
@@ -44,9 +31,6 @@ const FromToSection: React.FC<IProps> = (props) => {
           <FromToInput
             setIsSwapped={setIsSwapped}
             label={"To"}
-            openModal={props.openModal}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             filteredCurrencies={filteredCurrencies}
@@ -57,9 +41,6 @@ const FromToSection: React.FC<IProps> = (props) => {
           <FromToInput
             setIsSwapped={setIsSwapped}
             label={"To"}
-            openModal={props.openModal}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             filteredCurrencies={filteredCurrencies}
@@ -68,9 +49,6 @@ const FromToSection: React.FC<IProps> = (props) => {
           <FromToInput
             setIsSwapped={setIsSwapped}
             label={"From"}
-            openModal={props.openModal}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
             filteredCurrencies={filteredCurrencies}

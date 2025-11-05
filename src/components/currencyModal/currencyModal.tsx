@@ -9,11 +9,11 @@ import searchIcon from "../../assets/icons/search-icon.svg";
 import styles from "./currencyModal.module.scss";
 import type { ICurrencyDataItem } from "../../interfaces";
 import { CurrencyList } from "../index";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import type { RootState } from "../../services/store";
+import { handleCloseModal } from "../../services/Slices/modalSlice";
 
 interface IProps {
-  openModal: boolean;
-  handleOpenModal: () => void;
-  handleCloseModal: () => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
   filteredCurrencies: ICurrencyDataItem[];
@@ -22,20 +22,19 @@ interface IProps {
 const currencyModal: React.FC<IProps> = (props: IProps) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const {
-    searchValue,
-    setSearchValue,
-    handleCloseModal,
-    openModal,
-    filteredCurrencies,
-  } = props;
+  const { searchValue, setSearchValue, filteredCurrencies } = props;
+
+  const openModal = useAppSelector(
+    (state: RootState) => state.currencyModal.openedModal
+  );
+  const dispatch = useAppDispatch();
 
   return (
     <React.Fragment>
       <Dialog
         fullScreen={fullScreen}
         open={openModal}
-        onClose={() => handleCloseModal()}
+        onClose={() => dispatch(handleCloseModal())}
         aria-labelledby="responsive-dialog-title"
         PaperProps={{
           style: {
@@ -46,7 +45,7 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
         <DialogTitle id="responsive-dialog-title">
           <div className={styles["title-container"]}>
             <h2 className={styles["title"]}>{"Select currency"}</h2>
-            <label onClick={handleCloseModal}>&#10005;</label>
+            <label onClick={() => dispatch(handleCloseModal())}>&#10005;</label>
           </div>
           <h4 className={styles["subtitle"]}>
             Choose a currency from the list below or use the search bar to find

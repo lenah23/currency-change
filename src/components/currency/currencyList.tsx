@@ -11,7 +11,7 @@ const CurrencyList: React.FC<IProps> = (props) => {
     <div className={styles["currency-list__container"]}>
       {props.currencyList.length > 0 ? (
         props.currencyList.map((currency) => (
-          <CurrencyItem currencyItem={currency} />
+          <CurrencyItem currencyItem={currency} active={true}/>
         ))
       ) : (
         <div style={{ width: "100%", textAlign: "center" }}>
