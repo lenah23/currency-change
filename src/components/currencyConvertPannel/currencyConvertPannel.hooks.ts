@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UseCurrencyConvertPannelHooks = () => {
   const [inputValue, setInputValue] = useState<number>(0);
@@ -12,12 +12,33 @@ const UseCurrencyConvertPannelHooks = () => {
     setOpenModal(true);
   };
 
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [debouncedValue, setDebouncedValue] = useState<string>(searchValue);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(searchValue);
+    }, 250);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (debouncedValue) {
+      console.log("Debounced search:", debouncedValue);
+    }
+  }, [debouncedValue]);
+
   return {
     inputValue,
     setInputValue,
     openModal,
     handleCloseModal,
     handleOpenModal,
+    searchValue,
+    setSearchValue,
   };
 };
 

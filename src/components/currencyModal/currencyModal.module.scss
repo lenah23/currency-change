@@ -1,0 +1,50 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.title-container {
+  @include flexStyles(flex, row, space-between, center);
+  margin-bottom: 12px;
+
+  .title {
+    @include textStyles(
+      "Inter, sans-serif",
+      $fz-16,
+      $semiBold,
+      100%,
+      $main-title,
+      left
+    );
+  }
+}
+
+.subtitle {
+  @include textStyles(
+    "Inter, sans-serif",
+    $fz-14,
+    $medium,
+    100%,
+    $subtitle,
+    left
+  );
+  margin-bottom: 12px;
+}
+
+.search-icon__container {
+  position: absolute;
+  left: 10px;
+  top: 60%;
+  transform: translateY(-50%);
+}
+
+.search-currency__input {
+  width: 100%;
+  @include padding(8px, 12px, 8px, 36px);
+  border-radius: 8px;
+  border: 1px solid $border-dark-blue;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $border-light-blue;
+    box-shadow: 0 0 5px $border-light-blue;
+  }
+}

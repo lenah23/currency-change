@@ -7,10 +7,12 @@ interface IProps {
   openModal: boolean;
   handleOpenModal: () => void;
   handleCloseModal: () => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
 }
 
 const FromToInput: React.FC<IProps> = (props) => {
-  const { label, handleOpenModal, handleCloseModal } = props;
+  const { label, handleOpenModal, handleCloseModal, searchValue, setSearchValue } = props;
   return (
     <>
       <div className={styles["from-to-input"]} onClick={handleOpenModal}>
@@ -21,6 +23,8 @@ const FromToInput: React.FC<IProps> = (props) => {
         openModal={props.openModal}
         handleOpenModal={handleOpenModal}
         handleCloseModal={handleCloseModal}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
     </>
   );

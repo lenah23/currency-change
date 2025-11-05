@@ -4,9 +4,11 @@ import styles from "./currencyConvertPannel.module.scss";
 
 const CurrencyConvertPannel: React.FC = () => {
   const {
-    inputValue,
     openModal,
+    inputValue,
+    searchValue,
     setInputValue,
+    setSearchValue,
     handleOpenModal,
     handleCloseModal,
   } = UseCurrencyConvertPannelHooks();
@@ -19,6 +21,8 @@ const CurrencyConvertPannel: React.FC = () => {
         setInputValue={setInputValue}
         handleCloseModal={handleCloseModal}
         handleOpenModal={handleOpenModal}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
       <ConversionResults />
     </div>

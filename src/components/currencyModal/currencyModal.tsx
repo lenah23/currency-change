@@ -1,44 +1,64 @@
-import * as React from "react";
+import React from "react";
+import { useTheme } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import searchIcon from "../../assets/icons/search-icon.svg";
+import styles from "./currencyModal.module.scss";
 
 interface IProps {
   openModal: boolean;
   handleOpenModal: () => void;
   handleCloseModal: () => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
 }
 
 const currencyModal: React.FC<IProps> = (props: IProps) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const { searchValue, setSearchValue, handleCloseModal, openModal } = props;
 
   return (
     <React.Fragment>
       <Dialog
         fullScreen={fullScreen}
-        open={props.openModal}
-        onClose={() => props.handleCloseModal()}
+        open={openModal}
+        onClose={() => handleCloseModal()}
         aria-labelledby="responsive-dialog-title"
+        PaperProps={{
+          style: {
+            maxWidth: "440px",
+          },
+        }}
       >
-        <DialogTitle
-          id="responsive-dialog-title"
-          sx={{
-            display: "flex",
-            alignItems: "center", // optional: vertically center content
-            justifyContent: "space-between", // optional: space out children
-          }}
-        >
-          <h2>{"Use Google's location service?"}</h2>
-          <label onClick={props.handleCloseModal}>&#10005;</label>
+        <DialogTitle id="responsive-dialog-title">
+          <div className={styles["title-container"]}>
+            <h2 className={styles["title"]}>{"Select currency"}</h2>
+            <label onClick={handleCloseModal}>&#10005;</label>
+          </div>
+          <h4 className={styles["subtitle"]}>
+            Choose a currency from the list below or use the search bar to find
+            a specific currency.
+          </h4>
         </DialogTitle>
+
         <DialogContent>
           <DialogContentText>
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            <div style={{ position: "relative", width: "100%" }}>
+              <span className={styles["search-icon__container"]}>
+                <img src={searchIcon} alt="Search" width={18} height={18} />
+              </span>
+              <input
+                type="text"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="Search currency..."
+                className={styles["search-currency__input"]}
+              />
+            </div>
           </DialogContentText>
         </DialogContent>
       </Dialog>

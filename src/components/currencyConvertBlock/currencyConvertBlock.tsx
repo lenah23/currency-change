@@ -7,6 +7,8 @@ interface IProps {
   handleOpenModal: () => void;
   handleCloseModal: () => void;
   setInputValue: (value: number) => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
 }
 
 const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
@@ -16,6 +18,8 @@ const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
     setInputValue,
     handleOpenModal,
     handleCloseModal,
+    searchValue,
+    setSearchValue,
   } = props;
   return (
     <div className={styles["currency-convert__container"]}>
@@ -26,6 +30,8 @@ const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
         setInputValue={setInputValue}
         handleOpenModal={handleOpenModal}
         handleCloseModal={handleCloseModal}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
     </div>
   );

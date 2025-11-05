@@ -9,14 +9,18 @@ interface IProps {
   handleCloseModal: () => void;
   handleOpenModal: () => void;
   setInputValue: (value: number) => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
 }
 
 const FromToSection: React.FC<IProps> = (props) => {
   const [isSwapped, setIsSwapped] = useState<boolean>(false);
   const {
     openModal,
-    handleCloseModal,
+    searchValue,
+    setSearchValue,
     handleOpenModal,
+    handleCloseModal,
   } = props;
 
   return (
@@ -29,6 +33,8 @@ const FromToSection: React.FC<IProps> = (props) => {
             openModal={openModal}
             handleOpenModal={handleOpenModal}
             handleCloseModal={handleCloseModal}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
           <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
           <FromToInput
@@ -37,6 +43,8 @@ const FromToSection: React.FC<IProps> = (props) => {
             openModal={props.openModal}
             handleOpenModal={handleOpenModal}
             handleCloseModal={handleCloseModal}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
         </>
       ) : (
@@ -47,6 +55,8 @@ const FromToSection: React.FC<IProps> = (props) => {
             openModal={props.openModal}
             handleOpenModal={handleOpenModal}
             handleCloseModal={handleCloseModal}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
           <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
           <FromToInput
@@ -55,6 +65,8 @@ const FromToSection: React.FC<IProps> = (props) => {
             openModal={props.openModal}
             handleOpenModal={handleOpenModal}
             handleCloseModal={handleCloseModal}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
         </>
       )}
