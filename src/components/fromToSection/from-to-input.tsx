@@ -1,6 +1,4 @@
 import type { ICurrencyDataItem } from "../../interfaces";
-import { useAppDispatch } from "../../services/hooks";
-import { handleOpenModal } from "../../services/Slices/modalSlice";
 import { CurrencyItem, CurrencyModal } from "../index";
 import styles from "./fromToSection.module.scss";
 
@@ -9,18 +7,31 @@ interface IProps {
   label: string;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[]
+  filteredCurrencies: ICurrencyDataItem[];
+  currencyItem: ICurrencyDataItem;
+  role: "openModal" | "choseCurrency";
+  handleClickItem: () => void;
 }
 
 const FromToInput: React.FC<IProps> = (props) => {
-  const { label, searchValue, setSearchValue, filteredCurrencies } = props;
-  const dispatch = useAppDispatch();
-  
+  const {
+    label,
+    searchValue,
+    setSearchValue,
+    filteredCurrencies,
+    role,
+    handleClickItem,
+  } = props;
+
   return (
     <>
-      <div className={styles["from-to-input"]} onClick={() => dispatch(handleOpenModal())}>
+      <div className={styles["from-to-input"]}>
         <label className={styles["from-to-input__label"]}>{label}</label>
-        {/* <CurrencyItem currencyItem={}/> */}
+        <CurrencyItem
+          currencyItem={props.currencyItem}
+          role={role}
+          handleClickItem={handleClickItem}
+        />
       </div>
       <CurrencyModal
         searchValue={searchValue}

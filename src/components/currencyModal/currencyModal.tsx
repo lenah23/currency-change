@@ -6,12 +6,12 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import searchIcon from "../../assets/icons/search-icon.svg";
-import styles from "./currencyModal.module.scss";
 import type { ICurrencyDataItem } from "../../interfaces";
 import { CurrencyList } from "../index";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import type { RootState } from "../../services/store";
 import { handleCloseModal } from "../../services/Slices/modalSlice";
+import styles from "./currencyModal.module.scss";
 
 interface IProps {
   searchValue: string;
@@ -27,6 +27,7 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
   const openModal = useAppSelector(
     (state: RootState) => state.currencyModal.openedModal
   );
+
   const dispatch = useAppDispatch();
 
   return (

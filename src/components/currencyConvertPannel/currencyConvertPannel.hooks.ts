@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
-import { currenciesData } from "../../utils/currenciesData";
 import type { ICurrencyDataItem } from "../../interfaces";
+import { useAppSelector } from "../../services/hooks";
+import type { RootState } from "../../services/store";
 
 const UseCurrencyConvertPannelHooks = () => {
   const [inputValue, setInputValue] = useState<number>(0);
-
   const [searchValue, setSearchValue] = useState<string>("");
   const [debouncedValue, setDebouncedValue] = useState<string>(searchValue);
+  const currenciesData: ICurrencyDataItem[] = useAppSelector(
+    (state: RootState) => state.currency.currencyList
+  );
 
   useEffect(() => {
     const handler = setTimeout(() => {

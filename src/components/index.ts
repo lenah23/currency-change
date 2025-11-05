@@ -1,7 +1,9 @@
 import Button from "./button/button";
 import StatusBar from "./statusBar/statusBar";
+import ToSection from "./fromToSection/toSection";
 import CurrencyItem from "./currency/currencyItem";
 import CurrencyList from "./currency/currencyList";
+import FromSection from "./fromToSection/fromSection";
 import FromToInput from "./fromToSection/from-to-input";
 import FromToSection from "./fromToSection/fromToSection";
 import CurrencyModal from "./currencyModal/currencyModal";
@@ -14,7 +16,9 @@ import CurrencyExchangeInput from "./currencyExchangeInput/currencyExchangeInput
 export {
   Button,
   StatusBar,
+  ToSection,
   FromToInput,
+  FromSection,
   CurrencyItem,
   CurrencyList,
   FromToSection,

@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { FromToInput } from "../index";
-import switchIcon from "../../assets/icons/switch-icon.svg";
-import styles from "./fromToSection.module.scss";
+import { FromSection, ToSection } from "../index";
 import type { ICurrencyDataItem } from "../../interfaces";
+import styles from "./fromToSection.module.scss";
 
 interface IProps {
   inputValue: number;
@@ -19,41 +18,21 @@ const FromToSection: React.FC<IProps> = (props) => {
   return (
     <div className={styles["from-to-section"]}>
       {!isSwapped ? (
-        <>
-          <FromToInput
-            setIsSwapped={setIsSwapped}
-            label={"From"}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-            filteredCurrencies={filteredCurrencies}
-          />
-          <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
-          <FromToInput
-            setIsSwapped={setIsSwapped}
-            label={"To"}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-            filteredCurrencies={filteredCurrencies}
-          />
-        </>
+        <FromSection
+          setIsSwapped={setIsSwapped}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          filteredCurrencies={filteredCurrencies}
+          role={"openModal"}
+        />
       ) : (
-        <>
-          <FromToInput
-            setIsSwapped={setIsSwapped}
-            label={"To"}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-            filteredCurrencies={filteredCurrencies}
-          />
-          <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
-          <FromToInput
-            setIsSwapped={setIsSwapped}
-            label={"From"}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-            filteredCurrencies={filteredCurrencies}
-          />
-        </>
+        <ToSection
+          setIsSwapped={setIsSwapped}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          filteredCurrencies={filteredCurrencies}
+          role={"openModal"}
+        />
       )}
     </div>
   );
