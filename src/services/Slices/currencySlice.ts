@@ -79,7 +79,7 @@ const currencySlice = createSlice({
         // state.ratesLoading = false;
       })
       .addCase(fetchInverseRates.fulfilled, (state, action) => {
-        state.rates = action.payload;
+        state.inverseRates = action.payload;
         // state.ratesLoading = false;
       })
       .addCase(fetchRates.rejected, (state, action) => {

@@ -26,8 +26,6 @@ const ConversionResults: React.FC<IProps> = (props) => {
     }
   }, [rates, fromValue, toValue, props.inputValue]);
 
-  console.log(inverseRates, "inverseRates");
-
   return (
     <div className={styles["conversation-result__block"]}>
       <h2 className={styles["title"]}>Conversion result</h2>
@@ -50,7 +48,7 @@ const ConversionResults: React.FC<IProps> = (props) => {
         <div className={styles["exchange-pair"]}>
           <span className={styles["label"]}>Inverse Rate</span>
           <span className={styles["value"]}>
-            1 {toValue.code} = {inverseRates?.[toValue.code].toFixed(2)}{" "}
+            1 {toValue.code} = {inverseRates?.[fromValue.code].toFixed(5)}{" "}
             {fromValue.code}
           </span>
         </div>

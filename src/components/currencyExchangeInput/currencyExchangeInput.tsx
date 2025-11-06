@@ -3,6 +3,7 @@ import styles from "./currencyExchangeInput.module.scss";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import type { RootState } from "../../services/store";
 import {
+  fetchInverseRates,
   fetchRates,
   setInverseRates,
   setRates,
@@ -27,22 +28,30 @@ const CurrencyExchangeInput: React.FC<IProps> = (props: IProps) => {
   );
 
   const rates = useAppSelector((state: RootState) => state.currency.rates);
+  const inverseRates = useAppSelector(
+    (state: RootState) => state.currency.inverseRates
+  );
 
-  const RATES_CACHE_KEY = "currencyRates";
-  const RATES_CACHE_TIMESTAMP_KEY = "currencyRatesTimestamp";
   const CACHE_TTL = 24 * 60 * 60 * 1000;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const now = Date.now();
-    const cachedRates = localStorage.getItem(RATES_CACHE_KEY);
-    const cachedTimestamp = localStorage.getItem(RATES_CACHE_TIMESTAMP_KEY);
+    const cachedRates = localStorage.getItem("currencyRates");
+    const cachedInverseRates = localStorage.getItem("InverseCurrencyRates");
+    const cachedTimestamp = localStorage.getItem("currencyRatesTimestamp");
 
     const fetchAndCacheRates = async () => {
       dispatch(fetchRates(fromValue.code));
+      dispatch(fetchInverseRates(toValue.code));
 
-      localStorage.setItem(RATES_CACHE_KEY, JSON.stringify(rates));
-      localStorage.setItem(RATES_CACHE_TIMESTAMP_KEY, now.toString());
+      if (rates) {
+        localStorage.setItem("currencyRates", JSON.stringify(rates));
+      }
+      if (inverseRates) {
+        localStorage.setItem("InverseCurrencyRates", JSON.stringify(rates));
+      }
+      localStorage.setItem("currencyRatesTimestamp", now.toString());
       localStorage.setItem(
         "LAST_RATES_PAIR",
         JSON.stringify({
@@ -50,17 +59,20 @@ const CurrencyExchangeInput: React.FC<IProps> = (props: IProps) => {
           to: toValue.code,
         })
       );
-      dispatch(setRates(rates));
     };
 
     if (
       !cachedRates ||
       !cachedTimestamp ||
+      !cachedInverseRates ||
       now - Number(cachedTimestamp) > CACHE_TTL
     ) {
       fetchAndCacheRates();
+      console.log("in if");
     } else {
+      console.log("in else");
       dispatch(setRates(JSON.parse(cachedRates)));
+      dispatch(setInverseRates(JSON.parse(cachedInverseRates)));
     }
   }, [fromValue.code, toValue.code, dispatch]);
 
