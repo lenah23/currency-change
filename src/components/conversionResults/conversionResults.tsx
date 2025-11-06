@@ -26,6 +26,8 @@ const ConversionResults: React.FC<IProps> = (props) => {
     }
   }, [rates, fromValue, toValue, props.inputValue]);
 
+  console.log(inverseRates, "inverseRates")
+
   return (
     <div className={styles["conversation-result__block"]}>
       <h2 className={styles["title"]}>Conversion result</h2>

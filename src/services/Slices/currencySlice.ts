@@ -16,10 +16,20 @@ interface CurrencyState {
   inverseRates: Record<string, number> | undefined;
 }
 
+const savedLastRatesPair = localStorage.getItem("LAST_RATES_PAIR");
+const parsedLastRatesPair = savedLastRatesPair
+  ? (JSON.parse(savedLastRatesPair) as {
+      from: ICurrencyDataItem;
+      to: ICurrencyDataItem;
+    })
+  : null;
+
 const initialState: CurrencyState = {
   currencyList: currenciesData,
-  fromCurrency: currenciesData[0],
-  toCurrency: currenciesData[1],
+  fromCurrency: parsedLastRatesPair
+    ? parsedLastRatesPair.from
+    : currenciesData[0],
+  toCurrency: parsedLastRatesPair ? parsedLastRatesPair.to : currenciesData[1],
   fromToModal: "from",
   itemClickRole: "openModal",
   rates: undefined,

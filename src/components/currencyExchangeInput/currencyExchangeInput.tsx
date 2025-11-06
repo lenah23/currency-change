@@ -68,11 +68,10 @@ const CurrencyExchangeInput: React.FC<IProps> = (props: IProps) => {
       now - Number(cachedTimestamp) > CACHE_TTL
     ) {
       fetchAndCacheRates();
-      console.log("in if");
     } else {
-      console.log("in else");
       dispatch(setRates(JSON.parse(cachedRates)));
       dispatch(setInverseRates(JSON.parse(cachedInverseRates)));
+      dispatch(fetchInverseRates(toValue.code));
     }
   }, [fromValue.code, toValue.code, dispatch]);
 
@@ -80,8 +79,8 @@ const CurrencyExchangeInput: React.FC<IProps> = (props: IProps) => {
     localStorage.setItem(
       "LAST_RATES_PAIR",
       JSON.stringify({
-        from: fromValue.code,
-        to: toValue.code,
+        from: fromValue,
+        to: toValue,
       })
     );
   }, [fromValue, toValue]);
