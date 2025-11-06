@@ -20,7 +20,7 @@ const CurrencyConvertPannel: React.FC = () => {
         setSearchValue={setSearchValue}
         filteredCurrencies={filteredCurrencies}
       />
-      <ConversionResults />
+      <ConversionResults inputValue={inputValue}/>
     </div>
   );
 };
