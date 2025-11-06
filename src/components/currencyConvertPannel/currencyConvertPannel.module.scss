@@ -2,6 +2,6 @@
 @import "../../styles/_mixins";
 
 .currency-convert__pannel {
-  @include flexStyles(flex, row, center, center);
+  @include flexStyles(flex, row, center, flex-start);
   gap: 30px;
 }

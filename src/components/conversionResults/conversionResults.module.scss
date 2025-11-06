@@ -1,2 +1,98 @@
 @import "../../styles/_variables";
 @import "../../styles/_mixins";
+
+.conversation-result__block {
+  width: 318px;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 20px;
+
+  .title {
+    @include textStyles(
+      "Inter, sans-serif",
+      $fz-18,
+      $semiBold,
+      100%,
+      inherit,
+      left
+    );
+    margin-bottom: 24px;
+  }
+
+  .result-block {
+    @include flexStyles(flex, column, center, center);
+    gap: 4px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 24px;
+
+    .result {
+      @include textStyles(
+        "Inter, sans-serif",
+        $fz-24,
+        $bold,
+        100%,
+        inherit,
+        center
+      );
+    }
+
+    .from-value {
+      @include textStyles(
+        "Inter, sans-serif",
+        $fz-12,
+        $medium,
+        100%,
+        inherit,
+        center
+      );
+    }
+  }
+
+  .exchange-info {
+    @include flexStyles(flex, column, center, flex-start);
+    gap: 12px;
+    border: 1px solid $border-color;
+    border-radius: 16px;
+    padding: 20px;
+
+    .exchange-pair {
+      width: 100%;
+      @include flexStyles(flex, row, space-between, center);
+
+      .label {
+        @include textStyles(
+          "Inter, sans-serif",
+          $fz-12,
+          $semiBold,
+          100%,
+          $subtitle,
+          left
+        );
+      }
+
+      .value {
+        @include textStyles(
+          "Inter, sans-serif",
+          $fz-12,
+          $semiBold,
+          100%,
+          $main-title,
+          left
+        );
+      }
+    }
+  }
+
+  .additional-info {
+    padding-top: 24px;
+    @include textStyles(
+      "Inter, sans-serif",
+      $fz-12,
+      $regular,
+      100%,
+      $subtitle,
+      center
+    );
+  }
+}
