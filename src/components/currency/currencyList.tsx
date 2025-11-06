@@ -13,22 +13,37 @@ const CurrencyList: React.FC<IProps> = (props) => {
   const currencyType = useAppSelector(
     (state: RootState) => state.currency.fromToModal
   );
+  const fromValue = useAppSelector(
+    (state: RootState) => state.currency.fromCurrency
+  );
+  const toValue = useAppSelector(
+    (state: RootState) => state.currency.toCurrency
+  );
   const dispatch = useAppDispatch();
+  
 
   return (
     <div className={styles["currency-list__container"]}>
       {props.currencyList.length > 0 ? (
-        props.currencyList.map((currency) => (
-          <CurrencyItem
-            currencyItem={currency}
-            role={"choseCurrency"}
-            handleClickItem={() => {
-              currencyType === "from"
-                ? dispatch(setFromValue(currency))
-                : dispatch(setToValue(currency));
-            }}
-          />
-        ))
+        props.currencyList.map((currency) => {
+          const isSelected =
+            (currencyType === "from" && fromValue?.code === currency.code) ||
+            (currencyType === "to" && toValue?.code === currency.code);
+
+          return (
+            <CurrencyItem
+              key={currency.code}
+              currencyItem={currency}
+              role={"choseCurrency"}
+              handleClickItem={() => {
+                currencyType === "from"
+                  ? dispatch(setFromValue(currency))
+                  : dispatch(setToValue(currency));
+              }}
+              isSelected={isSelected}
+            />
+          );
+        })
       ) : (
         <div style={{ width: "100%", textAlign: "center" }}>
           No currencies found

@@ -1,15 +1,21 @@
 @import "../../styles/_mixins";
 @import "../../styles/_variables";
 
-.currency-info__container {
+.currency-item__container {
   min-width: 254px;
   width: 100%;
   border: 1px solid $border-color;
   border-radius: 8px;
   @include padding(6px, 8px, 6px, 8px);
   background-color: $bg-light;
-  @include flexStyles(flex, row, start, center);
+  @include flexStyles(flex, row, space-between, center);
   gap: 12px;
+
+  .currency-info__container {
+    width: 100%;
+    @include flexStyles(flex, row, flex-start, center);
+    gap: 12px;
+  }
 
   .currency-symbol {
     @include sizes(30px, 30px);
