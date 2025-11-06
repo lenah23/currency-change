@@ -69,9 +69,9 @@ const CurrencyExchangeInput: React.FC<IProps> = (props: IProps) => {
     ) {
       fetchAndCacheRates();
     } else {
+      dispatch(fetchInverseRates(toValue.code));
       dispatch(setRates(JSON.parse(cachedRates)));
       dispatch(setInverseRates(JSON.parse(cachedInverseRates)));
-      dispatch(fetchInverseRates(toValue.code));
     }
   }, [fromValue.code, toValue.code, dispatch]);
 

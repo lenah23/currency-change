@@ -4,4 +4,8 @@
 .currency-convert__pannel {
   @include flexStyles(flex, row, center, flex-start);
   gap: 30px;
+
+  @media screen and (max-width: 1024px) {
+    @include flexStyles(flex, column, center, center);
+  }
 }

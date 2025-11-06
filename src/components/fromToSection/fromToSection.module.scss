@@ -5,6 +5,13 @@
   @include flexStyles(flex, row, space-between, center);
   gap: 20px;
   padding-top: 20px;
+
+  @media screen and (max-width: 768px) {
+    @include flexStyles(flex, column, center, center);
+    & div {
+      width: 100%;
+    }
+  }
 }
 
 .from-to-input {
@@ -20,6 +27,4 @@
     display: block;
     margin-bottom: 8px;
   }
-
-  
 }

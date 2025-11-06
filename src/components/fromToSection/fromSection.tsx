@@ -38,18 +38,16 @@ const FromSection: React.FC<IProps> = (props) => {
 
   const swapLastRatesPair = () => {
     const pairStr = localStorage.getItem("LAST_RATES_PAIR");
-    if (!pairStr) return; // nothing to swap
+    if (!pairStr) return;
 
     try {
       const pair = JSON.parse(pairStr);
-      // Swap from and to
       const swappedPair = {
         from: pair.to,
         to: pair.from,
       };
       localStorage.setItem("LAST_RATES_PAIR", JSON.stringify(swappedPair));
     } catch (e) {
-      // If parsing fails, clear the key
       localStorage.removeItem("LAST_RATES_PAIR");
     }
   };

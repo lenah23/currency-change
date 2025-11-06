@@ -5,7 +5,7 @@ import styles from "./conversionResults.module.scss";
 
 interface IProps {
   inputValue: number;
-  trigger: boolean
+  trigger: boolean;
 }
 
 const ConversionResults: React.FC<IProps> = (props) => {
@@ -15,7 +15,6 @@ const ConversionResults: React.FC<IProps> = (props) => {
   );
 
   const lastPairRaw = localStorage.getItem("LAST_RATES_PAIR");
-  console.log(props.trigger, "aaaaaaaaaaa")
   const lastPair = lastPairRaw ? JSON.parse(lastPairRaw) : null;
 
   const changedResult = useMemo(() => {
@@ -24,6 +23,8 @@ const ConversionResults: React.FC<IProps> = (props) => {
     }
     return undefined;
   }, [rates, lastPair.to, lastPair.from, props.inputValue]);
+
+  console.log(inverseRates, "inverseRates")
 
   return (
     <div className={styles["conversation-result__block"]}>
