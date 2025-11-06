@@ -9,11 +9,13 @@ interface IProps {
   searchValue: string;
   setSearchValue: (value: string) => void;
   filteredCurrencies: ICurrencyDataItem[];
+  setTrigger: (val: boolean) => void;
+  trigger: boolean
 }
 
 const FromToSection: React.FC<IProps> = (props) => {
   const [isSwapped, setIsSwapped] = useState<boolean>(false);
-  const { searchValue, setSearchValue, filteredCurrencies } = props;
+  const { searchValue, setSearchValue, filteredCurrencies, trigger } = props;
 
   return (
     <div className={styles["from-to-section"]}>
@@ -24,6 +26,8 @@ const FromToSection: React.FC<IProps> = (props) => {
           setSearchValue={setSearchValue}
           filteredCurrencies={filteredCurrencies}
           role={"openModal"}
+          setTrigger={props.setTrigger}
+          trigger={trigger}
         />
       ) : (
         <ToSection
@@ -32,6 +36,8 @@ const FromToSection: React.FC<IProps> = (props) => {
           setSearchValue={setSearchValue}
           filteredCurrencies={filteredCurrencies}
           role={"openModal"}
+          setTrigger={props.setTrigger}
+          trigger={trigger}
         />
       )}
     </div>

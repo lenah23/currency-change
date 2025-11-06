@@ -8,7 +8,9 @@ const CurrencyConvertPannel: React.FC = () => {
     searchValue,
     setInputValue,
     setSearchValue,
-    filteredCurrencies
+    filteredCurrencies,
+    setTrigger,
+    trigger
   } = UseCurrencyConvertPannelHooks();
 
   return (
@@ -19,8 +21,10 @@ const CurrencyConvertPannel: React.FC = () => {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         filteredCurrencies={filteredCurrencies}
+        setTrigger={setTrigger}
+        trigger={trigger}
       />
-      <ConversionResults inputValue={inputValue}/>
+      <ConversionResults inputValue={inputValue} trigger={trigger}/>
     </div>
   );
 };

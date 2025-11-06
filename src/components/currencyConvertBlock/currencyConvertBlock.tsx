@@ -7,7 +7,9 @@ interface IProps {
   setInputValue: (value: number) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[]
+  filteredCurrencies: ICurrencyDataItem[];
+  setTrigger: (val: boolean) => void;
+  trigger: boolean
 }
 
 const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
@@ -16,7 +18,9 @@ const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
     setInputValue,
     searchValue,
     setSearchValue,
-    filteredCurrencies
+    filteredCurrencies,
+    setTrigger,
+    trigger
   } = props;
   return (
     <div className={styles["currency-convert__container"]}>
@@ -27,6 +31,8 @@ const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         filteredCurrencies={filteredCurrencies}
+        setTrigger={setTrigger}
+        trigger={trigger}
       />
     </div>
   );

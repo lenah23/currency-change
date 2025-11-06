@@ -10,6 +10,7 @@ const UseCurrencyConvertPannelHooks = () => {
   const currenciesData: ICurrencyDataItem[] = useAppSelector(
     (state: RootState) => state.currency.currencyList
   );
+  const [trigger, setTrigger] = useState(false)
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -37,6 +38,8 @@ const UseCurrencyConvertPannelHooks = () => {
     searchValue,
     setSearchValue,
     filteredCurrencies,
+    setTrigger,
+    trigger
   };
 };
 

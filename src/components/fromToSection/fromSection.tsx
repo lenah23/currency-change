@@ -13,6 +13,8 @@ interface IProps {
   filteredCurrencies: ICurrencyDataItem[];
   setIsSwapped: Dispatch<SetStateAction<boolean>>;
   role: "openModal" | "choseCurrency";
+  setTrigger: (val: boolean) => void;
+  trigger: boolean;
 }
 
 const FromSection: React.FC<IProps> = (props) => {
@@ -21,6 +23,8 @@ const FromSection: React.FC<IProps> = (props) => {
     searchValue,
     setSearchValue,
     filteredCurrencies,
+    trigger,
+    setTrigger,
   } = props;
 
   const chosenFromCurrency = useAppSelector(
@@ -32,6 +36,24 @@ const FromSection: React.FC<IProps> = (props) => {
 
   const dispatch = useAppDispatch();
 
+  const swapLastRatesPair = () => {
+    const pairStr = localStorage.getItem("LAST_RATES_PAIR");
+    if (!pairStr) return; // nothing to swap
+
+    try {
+      const pair = JSON.parse(pairStr);
+      // Swap from and to
+      const swappedPair = {
+        from: pair.to,
+        to: pair.from,
+      };
+      localStorage.setItem("LAST_RATES_PAIR", JSON.stringify(swappedPair));
+    } catch (e) {
+      // If parsing fails, clear the key
+      localStorage.removeItem("LAST_RATES_PAIR");
+    }
+  };
+
   return (
     <>
       <FromToInput
@@ -42,9 +64,19 @@ const FromSection: React.FC<IProps> = (props) => {
         filteredCurrencies={filteredCurrencies}
         currencyItem={chosenFromCurrency}
         role={"openModal"}
-        handleClickItem={() => {dispatch(handleOpenModal()); dispatch(setModalType('from'))}}
+        handleClickItem={() => {
+          dispatch(handleOpenModal());
+          dispatch(setModalType("from"));
+        }}
       />
-      <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
+      <img
+        src={switchIcon}
+        onClick={() => {
+          setIsSwapped((prev) => !prev);
+          swapLastRatesPair();
+          setTrigger(!trigger);
+        }}
+      />
       <FromToInput
         setIsSwapped={setIsSwapped}
         label={"To"}
@@ -53,7 +85,10 @@ const FromSection: React.FC<IProps> = (props) => {
         filteredCurrencies={filteredCurrencies}
         currencyItem={chosenToCurrency}
         role={"openModal"}
-        handleClickItem={() => {dispatch(handleOpenModal()); dispatch(setModalType('to'))}}
+        handleClickItem={() => {
+          dispatch(handleOpenModal());
+          dispatch(setModalType("to"));
+        }}
       />
     </>
   );

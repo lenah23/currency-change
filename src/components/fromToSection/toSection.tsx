@@ -13,6 +13,8 @@ interface IProps {
   filteredCurrencies: ICurrencyDataItem[];
   setIsSwapped: Dispatch<SetStateAction<boolean>>;
   role: "openModal" | "choseCurrency";
+  setTrigger: (val: boolean) => void;
+  trigger: boolean;
 }
 
 const ToSection: React.FC<IProps> = (props) => {
@@ -22,6 +24,8 @@ const ToSection: React.FC<IProps> = (props) => {
     setSearchValue,
     filteredCurrencies,
     role,
+    setTrigger,
+    trigger,
   } = props;
 
   const chosenFromCurrency = useAppSelector(
@@ -31,6 +35,22 @@ const ToSection: React.FC<IProps> = (props) => {
     (state: RootState) => state.currency.toCurrency
   );
   const dispatch = useAppDispatch();
+
+  const swapLastRatesPair = () => {
+    const pairStr = localStorage.getItem("LAST_RATES_PAIR");
+    if (!pairStr) return;
+
+    try {
+      const pair = JSON.parse(pairStr);
+      const swappedPair = {
+        from: pair.to,
+        to: pair.from,
+      };
+      localStorage.setItem("LAST_RATES_PAIR", JSON.stringify(swappedPair));
+    } catch (e) {
+      localStorage.removeItem("LAST_RATES_PAIR");
+    }
+  };
 
   return (
     <>
@@ -47,7 +67,14 @@ const ToSection: React.FC<IProps> = (props) => {
           dispatch(setModalType("to"));
         }}
       />
-      <img src={switchIcon} onClick={() => setIsSwapped((prev) => !prev)} />
+      <img
+        src={switchIcon}
+        onClick={() => {
+          setIsSwapped((prev) => !prev);
+          swapLastRatesPair();
+          setTrigger(!trigger);
+        }}
+      />
       <FromToInput
         setIsSwapped={setIsSwapped}
         label={"From"}

@@ -5,53 +5,50 @@ import styles from "./conversionResults.module.scss";
 
 interface IProps {
   inputValue: number;
+  trigger: boolean
 }
 
 const ConversionResults: React.FC<IProps> = (props) => {
-  const fromValue = useAppSelector(
-    (state: RootState) => state.currency.fromCurrency
-  );
-  const toValue = useAppSelector(
-    (state: RootState) => state.currency.toCurrency
-  );
-
   const rates = useAppSelector((state: RootState) => state.currency.rates);
   const inverseRates = useAppSelector(
     (state: RootState) => state.currency.inverseRates
   );
 
-  const changedResult = useMemo(() => {
-    if (rates) {
-      return props.inputValue * rates[toValue.code];
-    }
-  }, [rates, fromValue, toValue, props.inputValue]);
+  const lastPairRaw = localStorage.getItem("LAST_RATES_PAIR");
+  console.log(props.trigger, "aaaaaaaaaaa")
+  const lastPair = lastPairRaw ? JSON.parse(lastPairRaw) : null;
 
-  console.log(inverseRates, "inverseRates")
+  const changedResult = useMemo(() => {
+    if (rates && lastPair.to?.code) {
+      return props.inputValue * rates[lastPair.to?.code];
+    }
+    return undefined;
+  }, [rates, lastPair.to, lastPair.from, props.inputValue]);
 
   return (
     <div className={styles["conversation-result__block"]}>
       <h2 className={styles["title"]}>Conversion result</h2>
       <div className={styles["result-block"]}>
         <div className={styles["result"]}>
-          {toValue.symbol} {changedResult?.toFixed(2)}{" "}
+          {lastPair.to.symbol} {changedResult?.toFixed(2)}{" "}
         </div>
         <div className={styles["from-value"]}>
-          {props.inputValue ? props.inputValue : 1} {fromValue.code} ={" "}
+          {props.inputValue ? props.inputValue : 1} {lastPair.from.code} ={" "}
         </div>
       </div>
       <div className={styles["exchange-info"]}>
         <div className={styles["exchange-pair"]}>
           <span className={styles["label"]}>Exchange Rate</span>
           <span className={styles["value"]}>
-            1 {fromValue.code} = {rates?.[toValue.code].toFixed(2)}{" "}
-            {toValue.code}
+            1 {lastPair.from.code} = {rates?.[lastPair.to.code].toFixed(2)}{" "}
+            {lastPair.to.code}
           </span>
         </div>
         <div className={styles["exchange-pair"]}>
           <span className={styles["label"]}>Inverse Rate</span>
           <span className={styles["value"]}>
-            1 {toValue.code} = {inverseRates?.[fromValue.code].toFixed(5)}{" "}
-            {fromValue.code}
+            1 {lastPair.to.code} ={" "}
+            {inverseRates?.[lastPair.from.code].toFixed(5)} {lastPair.from.code}
           </span>
         </div>
       </div>
