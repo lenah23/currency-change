@@ -1,15 +1,14 @@
 import React from "react";
-import { useTheme } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import searchIcon from "../../assets/icons/search-icon.svg";
 import { CurrencyList } from "../index";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import type { RootState } from "../../services/store";
 import { handleCloseModal } from "../../services/Slices/modalSlice";
+import UseCurrencyModalHooks from "./currencyModal.hooks";
 import styles from "./currencyModal.module.scss";
 
 interface IProps {
@@ -18,8 +17,15 @@ interface IProps {
 }
 
 const currencyModal: React.FC<IProps> = (props: IProps) => {
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const {
+    fullScreen,
+    handleKeyDown,
+    filteredCurrencies,
+    itemRefs,
+    focusedIndex,
+    setFocusedIndex,
+  } = UseCurrencyModalHooks();
+
   const { searchValue, setSearchValue } = props;
 
   const openModal = useAppSelector(
@@ -27,9 +33,6 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
   );
 
   const dispatch = useAppDispatch();
-  const filteredCurrencies = useAppSelector(
-    (state: RootState) => state.currency.filteredCurrencies
-  );
 
   return (
     <React.Fragment>
@@ -37,6 +40,7 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
         fullScreen={fullScreen}
         open={openModal}
         onClose={() => dispatch(handleCloseModal())}
+        onKeyDown={handleKeyDown}
         aria-labelledby="responsive-dialog-title"
         PaperProps={{
           style: {
@@ -63,13 +67,19 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search currency..."
               className={styles["search-currency__input"]}
+              onKeyDown={handleKeyDown}
             />
           </div>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
             <div className={styles["currencyLst"]}>
-              <CurrencyList currencyList={filteredCurrencies} />
+              <CurrencyList
+                currencyList={filteredCurrencies}
+                itemRefs={itemRefs.current}
+                focusedIndex={focusedIndex}
+                setFocusedIndex={setFocusedIndex}
+              />
             </div>
           </DialogContentText>
         </DialogContent>

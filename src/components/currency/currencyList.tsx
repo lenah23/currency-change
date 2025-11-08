@@ -7,9 +7,17 @@ import styles from "./currency.module.scss";
 
 interface IProps {
   currencyList: ICurrencyDataItem[];
+  itemRefs: React.RefObject<HTMLDivElement>[];
+  focusedIndex: number;
+  setFocusedIndex: (val: number) => void;
 }
 
-const CurrencyList: React.FC<IProps> = (props) => {
+const CurrencyList: React.FC<IProps> = ({
+  currencyList,
+  itemRefs,
+  focusedIndex,
+  setFocusedIndex,
+}) => {
   const currencyType = useAppSelector(
     (state: RootState) => state.currency.fromToModal
   );
@@ -20,27 +28,29 @@ const CurrencyList: React.FC<IProps> = (props) => {
     (state: RootState) => state.currency.toCurrency
   );
   const dispatch = useAppDispatch();
-  
 
   return (
     <div className={styles["currency-list__container"]}>
-      {props.currencyList.length > 0 ? (
-        props.currencyList.map((currency) => {
+      {currencyList.length > 0 ? (
+        currencyList.map((currency, idx) => {
           const isSelected =
             (currencyType === "from" && fromValue?.code === currency.code) ||
             (currencyType === "to" && toValue?.code === currency.code);
 
           return (
             <CurrencyItem
-              key={currency.code}
               currencyItem={currency}
-              role={"choseCurrency"}
+              role="choseCurrency"
               handleClickItem={() => {
                 currencyType === "from"
                   ? dispatch(setFromValue(currency))
                   : dispatch(setToValue(currency));
               }}
               isSelected={isSelected}
+              tabIndex={idx === focusedIndex ? 0 : -1}
+              itemRef={itemRefs[idx]}
+              onFocus={() => setFocusedIndex(idx)}
+              isFocused={idx === focusedIndex}
             />
           );
         })
