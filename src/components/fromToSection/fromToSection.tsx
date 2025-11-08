@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FromSection, ToSection } from "../index";
-import type { ICurrencyDataItem } from "../../interfaces";
 import styles from "./fromToSection.module.scss";
 
 interface IProps {
@@ -8,14 +7,13 @@ interface IProps {
   setInputValue: (value: string) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[];
   setTrigger: (val: boolean) => void;
-  trigger: boolean
+  trigger: boolean;
 }
 
 const FromToSection: React.FC<IProps> = (props) => {
   const [isSwapped, setIsSwapped] = useState<boolean>(false);
-  const { searchValue, setSearchValue, filteredCurrencies, trigger } = props;
+  const { searchValue, setSearchValue, trigger } = props;
 
   return (
     <div className={styles["from-to-section"]}>
@@ -24,7 +22,6 @@ const FromToSection: React.FC<IProps> = (props) => {
           setIsSwapped={setIsSwapped}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-          filteredCurrencies={filteredCurrencies}
           role={"openModal"}
           setTrigger={props.setTrigger}
           trigger={trigger}
@@ -34,7 +31,6 @@ const FromToSection: React.FC<IProps> = (props) => {
           setIsSwapped={setIsSwapped}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-          filteredCurrencies={filteredCurrencies}
           role={"openModal"}
           setTrigger={props.setTrigger}
           trigger={trigger}

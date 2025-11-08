@@ -14,6 +14,7 @@ interface CurrencyState {
   itemClickRole: "openModal" | "choseCurrency";
   rates: Record<string, number> | undefined;
   inverseRates: Record<string, number> | undefined;
+  filteredCurrencies: ICurrencyDataItem[];
 }
 
 const savedLastRatesPair = localStorage.getItem("LAST_RATES_PAIR");
@@ -34,6 +35,7 @@ const initialState: CurrencyState = {
   itemClickRole: "openModal",
   rates: undefined,
   inverseRates: undefined,
+  filteredCurrencies: currenciesData,
 };
 
 export const fetchRates = createAsyncThunk(
@@ -77,24 +79,17 @@ const currencySlice = createSlice({
     setInverseRates(state, action: PayloadAction<any>) {
       state.rates = action.payload;
     },
+    setFilteredCurrencies(state, action: PayloadAction<any>) {
+      state.filteredCurrencies = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchRates.pending, (state) => {
-        // state.ratesLoading = true;
-        // state.ratesError = null;
-      })
       .addCase(fetchRates.fulfilled, (state, action) => {
         state.rates = action.payload;
-        // state.ratesLoading = false;
       })
       .addCase(fetchInverseRates.fulfilled, (state, action) => {
         state.inverseRates = action.payload;
-        // state.ratesLoading = false;
-      })
-      .addCase(fetchRates.rejected, (state, action) => {
-        // state.ratesLoading = false;
-        // state.ratesError = action.error.message || "Failed to fetch rates";
       });
   },
 });
@@ -105,5 +100,6 @@ export const {
   setModalType,
   setRates,
   setInverseRates,
+  setFilteredCurrencies,
 } = currencySlice.actions;
 export default currencySlice.reducer;

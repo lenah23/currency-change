@@ -1,4 +1,3 @@
-import type { ICurrencyDataItem } from "../../interfaces";
 import { CurrencyExchangeInput, FromToSection } from "../index";
 import styles from "./currencyConvertBlock.module.scss";
 
@@ -7,9 +6,8 @@ interface IProps {
   setInputValue: (value: string) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[];
   setTrigger: (val: boolean) => void;
-  trigger: boolean
+  trigger: boolean;
 }
 
 const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
@@ -18,9 +16,8 @@ const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
     setInputValue,
     searchValue,
     setSearchValue,
-    filteredCurrencies,
     setTrigger,
-    trigger
+    trigger,
   } = props;
   return (
     <div className={styles["currency-convert__container"]}>
@@ -30,7 +27,6 @@ const CurrencyConvertBlock: React.FC<IProps> = (props: IProps) => {
         setInputValue={setInputValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        filteredCurrencies={filteredCurrencies}
         setTrigger={setTrigger}
         trigger={trigger}
       />

@@ -6,7 +6,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import searchIcon from "../../assets/icons/search-icon.svg";
-import type { ICurrencyDataItem } from "../../interfaces";
 import { CurrencyList } from "../index";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import type { RootState } from "../../services/store";
@@ -16,19 +15,21 @@ import styles from "./currencyModal.module.scss";
 interface IProps {
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[];
 }
 
 const currencyModal: React.FC<IProps> = (props: IProps) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const { searchValue, setSearchValue, filteredCurrencies } = props;
+  const { searchValue, setSearchValue } = props;
 
   const openModal = useAppSelector(
     (state: RootState) => state.currencyModal.openedModal
   );
 
   const dispatch = useAppDispatch();
+  const filteredCurrencies = useAppSelector(
+    (state: RootState) => state.currency.filteredCurrencies
+  );
 
   return (
     <React.Fragment>
@@ -65,7 +66,6 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
             />
           </div>
         </DialogTitle>
-
         <DialogContent>
           <DialogContentText>
             <div className={styles["currencyLst"]}>

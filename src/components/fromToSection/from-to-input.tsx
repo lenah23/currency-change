@@ -7,7 +7,6 @@ interface IProps {
   label: string;
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[];
   currencyItem: ICurrencyDataItem;
   role: "openModal" | "choseCurrency";
   handleClickItem: () => void;
@@ -18,7 +17,6 @@ const FromToInput: React.FC<IProps> = (props) => {
     label,
     searchValue,
     setSearchValue,
-    filteredCurrencies,
     role,
     handleClickItem,
   } = props;
@@ -36,7 +34,6 @@ const FromToInput: React.FC<IProps> = (props) => {
       <CurrencyModal
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        filteredCurrencies={filteredCurrencies}
       />
     </>
   );

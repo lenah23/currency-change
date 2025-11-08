@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { ICurrencyDataItem } from "../../interfaces";
-import { useAppSelector } from "../../services/hooks";
 import type { RootState } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { setFilteredCurrencies } from "../../services/Slices/currencySlice";
 
 const UseCurrencyConvertPannelHooks = () => {
   const [inputValue, setInputValue] = useState<string>("1");
@@ -10,7 +11,8 @@ const UseCurrencyConvertPannelHooks = () => {
   const currenciesData: ICurrencyDataItem[] = useAppSelector(
     (state: RootState) => state.currency.currencyList
   );
-  const [trigger, setTrigger] = useState(false)
+  const [trigger, setTrigger] = useState(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -22,14 +24,14 @@ const UseCurrencyConvertPannelHooks = () => {
     };
   }, [searchValue]);
 
-  const filteredCurrencies: ICurrencyDataItem[] = useMemo(() => {
-    if (!debouncedValue) return currenciesData;
+  useEffect(() => {
     const search = debouncedValue.toLowerCase();
-    return currenciesData.filter(
+    const filteredData = currenciesData.filter(
       (currency) =>
         currency.name.toLowerCase().includes(search) ||
         currency.code.toLowerCase().includes(search)
     );
+    dispatch(setFilteredCurrencies(filteredData));
   }, [debouncedValue, currenciesData]);
 
   return {
@@ -37,9 +39,8 @@ const UseCurrencyConvertPannelHooks = () => {
     setInputValue,
     searchValue,
     setSearchValue,
-    filteredCurrencies,
     setTrigger,
-    trigger
+    trigger,
   };
 };
 

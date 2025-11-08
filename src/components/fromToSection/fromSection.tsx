@@ -1,5 +1,4 @@
 import { FromToInput } from "../index";
-import type { ICurrencyDataItem } from "../../interfaces";
 import type { Dispatch, SetStateAction } from "react";
 import type { RootState } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
@@ -10,7 +9,6 @@ import switchIcon from "../../assets/icons/switch-icon.svg";
 interface IProps {
   searchValue: string;
   setSearchValue: (value: string) => void;
-  filteredCurrencies: ICurrencyDataItem[];
   setIsSwapped: Dispatch<SetStateAction<boolean>>;
   role: "openModal" | "choseCurrency";
   setTrigger: (val: boolean) => void;
@@ -18,14 +16,8 @@ interface IProps {
 }
 
 const FromSection: React.FC<IProps> = (props) => {
-  const {
-    setIsSwapped,
-    searchValue,
-    setSearchValue,
-    filteredCurrencies,
-    trigger,
-    setTrigger,
-  } = props;
+  const { setIsSwapped, searchValue, setSearchValue, trigger, setTrigger } =
+    props;
 
   const chosenFromCurrency = useAppSelector(
     (state: RootState) => state.currency.fromCurrency
@@ -59,7 +51,6 @@ const FromSection: React.FC<IProps> = (props) => {
         label={"From"}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        filteredCurrencies={filteredCurrencies}
         currencyItem={chosenFromCurrency}
         role={"openModal"}
         handleClickItem={() => {
@@ -80,7 +71,6 @@ const FromSection: React.FC<IProps> = (props) => {
         label={"To"}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        filteredCurrencies={filteredCurrencies}
         currencyItem={chosenToCurrency}
         role={"openModal"}
         handleClickItem={() => {
