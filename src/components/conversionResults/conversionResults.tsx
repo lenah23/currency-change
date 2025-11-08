@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { useAppSelector } from "../../services/hooks";
-import type { RootState } from "../../services/store";
+import {
+  selectInverseRates,
+  selectRates,
+} from "../../services/Slices/selectors";
 import styles from "./conversionResults.module.scss";
 
 interface IProps {
@@ -9,10 +12,8 @@ interface IProps {
 }
 
 const ConversionResults: React.FC<IProps> = (props) => {
-  const rates = useAppSelector((state: RootState) => state.currency.rates);
-  const inverseRates = useAppSelector(
-    (state: RootState) => state.currency.inverseRates
-  );
+  const rates = useAppSelector(selectRates);
+  const inverseRates = useAppSelector(selectInverseRates);
 
   const lastPairRaw = localStorage.getItem("LAST_RATES_PAIR");
   const lastPair = lastPairRaw ? JSON.parse(lastPairRaw) : null;

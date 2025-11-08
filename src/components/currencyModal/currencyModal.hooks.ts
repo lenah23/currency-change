@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import type { RootState } from "../../services/store";
-import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { handleCloseModal } from "../../services/Slices/modalSlice";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { setFromValue, setToValue } from "../../services/Slices/currencySlice";
+import {
+  selectFilteredCurrencies,
+  selectFromToModal,
+} from "../../services/Slices/selectors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
@@ -12,17 +15,13 @@ const UseCurrencyModalHooks = () => {
   const [focusedIndex, setFocusedIndex] = useState<number>(0);
   const itemRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);
 
-  const filteredCurrencies = useAppSelector(
-    (state: RootState) => state.currency.filteredCurrencies
-  );
+  const filteredCurrencies = useAppSelector(selectFilteredCurrencies);
 
   itemRefs.current = filteredCurrencies.map(
     (_, i) => itemRefs.current[i] ?? React.createRef<HTMLDivElement>()
   );
 
-  const currencyType = useAppSelector(
-    (state: RootState) => state.currency.fromToModal
-  );
+  const currencyType = useAppSelector(selectFromToModal);
 
   const dispatch = useAppDispatch();
 

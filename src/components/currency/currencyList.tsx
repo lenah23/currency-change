@@ -1,9 +1,13 @@
 import type { ICurrencyDataItem } from "../../interfaces";
-import type { RootState } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { setFromValue, setToValue } from "../../services/Slices/currencySlice";
 import { CurrencyItem } from "../index";
 import styles from "./currency.module.scss";
+import {
+  selectFromCurrency,
+  selectFromToModal,
+  selectToCurrency,
+} from "../../services/Slices/selectors";
 
 interface IProps {
   currencyList: ICurrencyDataItem[];
@@ -18,15 +22,9 @@ const CurrencyList: React.FC<IProps> = ({
   focusedIndex,
   setFocusedIndex,
 }) => {
-  const currencyType = useAppSelector(
-    (state: RootState) => state.currency.fromToModal
-  );
-  const fromValue = useAppSelector(
-    (state: RootState) => state.currency.fromCurrency
-  );
-  const toValue = useAppSelector(
-    (state: RootState) => state.currency.toCurrency
-  );
+  const currencyType = useAppSelector(selectFromToModal);
+  const fromValue = useAppSelector(selectFromCurrency);
+  const toValue = useAppSelector(selectToCurrency);
   const dispatch = useAppDispatch();
 
   return (

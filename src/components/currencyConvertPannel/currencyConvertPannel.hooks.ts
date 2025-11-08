@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
-import type { ICurrencyDataItem } from "../../interfaces";
-import type { RootState } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { setFilteredCurrencies } from "../../services/Slices/currencySlice";
+import { selectCurrencyList } from "../../services/Slices/selectors";
+import type { ICurrencyDataItem } from "../../interfaces";
 
 const UseCurrencyConvertPannelHooks = () => {
   const [inputValue, setInputValue] = useState<string>("1");
   const [searchValue, setSearchValue] = useState<string>("");
   const [debouncedValue, setDebouncedValue] = useState<string>(searchValue);
-  const currenciesData: ICurrencyDataItem[] = useAppSelector(
-    (state: RootState) => state.currency.currencyList
-  );
-  const [trigger, setTrigger] = useState(false);
+  const currenciesData: ICurrencyDataItem[] = useAppSelector(selectCurrencyList);
+  const [trigger, setTrigger] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -35,12 +33,12 @@ const UseCurrencyConvertPannelHooks = () => {
   }, [debouncedValue, currenciesData]);
 
   return {
+    trigger,
     inputValue,
-    setInputValue,
     searchValue,
+    setInputValue,
     setSearchValue,
     setTrigger,
-    trigger,
   };
 };
 

@@ -3,12 +3,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import searchIcon from "../../assets/icons/search-icon.svg";
 import { CurrencyList } from "../index";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
-import type { RootState } from "../../services/store";
 import { handleCloseModal } from "../../services/Slices/modalSlice";
 import UseCurrencyModalHooks from "./currencyModal.hooks";
+import { selectCurrencyModal } from "../../services/Slices/selectors";
+import searchIcon from "../../assets/icons/search-icon.svg";
 import styles from "./currencyModal.module.scss";
 
 interface IProps {
@@ -18,19 +18,17 @@ interface IProps {
 
 const currencyModal: React.FC<IProps> = (props: IProps) => {
   const {
-    fullScreen,
-    handleKeyDown,
-    filteredCurrencies,
     itemRefs,
+    fullScreen,
     focusedIndex,
+    filteredCurrencies,
     setFocusedIndex,
+    handleKeyDown,
   } = UseCurrencyModalHooks();
 
   const { searchValue, setSearchValue } = props;
 
-  const openModal = useAppSelector(
-    (state: RootState) => state.currencyModal.openedModal
-  );
+  const openModal = useAppSelector(selectCurrencyModal);
 
   const dispatch = useAppDispatch();
 
@@ -51,7 +49,12 @@ const currencyModal: React.FC<IProps> = (props: IProps) => {
         <DialogTitle id="responsive-dialog-title">
           <div className={styles["title-container"]}>
             <h2 className={styles["title"]}>{"Select currency"}</h2>
-            <label onClick={() => dispatch(handleCloseModal())}>&#10005;</label>
+            <label
+              onClick={() => dispatch(handleCloseModal())}
+              style={{ cursor: "pointer" }}
+            >
+              &#10005;
+            </label>
           </div>
           <h4 className={styles["subtitle"]}>
             Choose a currency from the list below or use the search bar to find

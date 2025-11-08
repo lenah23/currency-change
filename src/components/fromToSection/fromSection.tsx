@@ -1,30 +1,29 @@
 import { FromToInput } from "../index";
 import type { Dispatch, SetStateAction } from "react";
-import type { RootState } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { handleOpenModal } from "../../services/Slices/modalSlice";
 import { setModalType } from "../../services/Slices/currencySlice";
 import switchIcon from "../../assets/icons/switch-icon.svg";
+import {
+  selectFromCurrency,
+  selectToCurrency,
+} from "../../services/Slices/selectors";
 
 interface IProps {
+  role: "openModal" | "choseCurrency";
+  trigger: boolean;
   searchValue: string;
   setSearchValue: (value: string) => void;
   setIsSwapped: Dispatch<SetStateAction<boolean>>;
-  role: "openModal" | "choseCurrency";
   setTrigger: (val: boolean) => void;
-  trigger: boolean;
 }
 
 const FromSection: React.FC<IProps> = (props) => {
   const { setIsSwapped, searchValue, setSearchValue, trigger, setTrigger } =
     props;
 
-  const chosenFromCurrency = useAppSelector(
-    (state: RootState) => state.currency.fromCurrency
-  );
-  const chosenToCurrency = useAppSelector(
-    (state: RootState) => state.currency.toCurrency
-  );
+  const chosenFromCurrency = useAppSelector(selectFromCurrency);
+  const chosenToCurrency = useAppSelector(selectToCurrency);
 
   const dispatch = useAppDispatch();
 
