@@ -1,6 +1,7 @@
 import "./App.scss";
-import { ConverterMainContainer } from "./components";
 import { Suspense } from "react";
+import { ToastContainer } from "react-toastify";
+import { ConverterMainContainer } from "./components";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
@@ -23,6 +24,7 @@ function App() {
       >
         <ConverterMainContainer />
       </Suspense>
+      <ToastContainer />
     </div>
   );
 }

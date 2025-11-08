@@ -12,6 +12,7 @@ import {
   selectRates,
   selectToCurrency,
 } from "../../services/Slices/selectors";
+import { toast } from "react-toastify";
 import styles from "./currencyExchangeInput.module.scss";
 
 interface IProps {
@@ -56,23 +57,31 @@ const CurrencyExchangeInput: React.FC<IProps> = (props: IProps) => {
     const cachedTimestamp = localStorage.getItem("currencyRatesTimestamp");
 
     const fetchAndCacheRates = async () => {
-      dispatch(fetchRates(fromValue.code));
-      dispatch(fetchInverseRates(toValue.code));
+      try {
+        await dispatch(fetchRates(fromValue.code));
+        await dispatch(fetchInverseRates(toValue.code));
 
-      if (rates) {
-        localStorage.setItem("currencyRates", JSON.stringify(rates));
+        if (rates) {
+          localStorage.setItem("currencyRates", JSON.stringify(rates));
+        }
+        if (inverseRates) {
+          localStorage.setItem(
+            "InverseCurrencyRates",
+            JSON.stringify(inverseRates)
+          );
+        }
+        localStorage.setItem("currencyRatesTimestamp", now.toString());
+        localStorage.setItem(
+          "LAST_RATES_PAIR",
+          JSON.stringify({
+            from: fromValue.code,
+            to: toValue.code,
+          })
+        );
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        toast.error(`Failed to fetch or cache rates: ${message}`);
       }
-      if (inverseRates) {
-        localStorage.setItem("InverseCurrencyRates", JSON.stringify(rates));
-      }
-      localStorage.setItem("currencyRatesTimestamp", now.toString());
-      localStorage.setItem(
-        "LAST_RATES_PAIR",
-        JSON.stringify({
-          from: fromValue.code,
-          to: toValue.code,
-        })
-      );
     };
 
     if (
