@@ -3,8 +3,8 @@ import { CurrencyExchangeInput, FromToSection } from "../index";
 import styles from "./currencyConvertBlock.module.scss";
 
 interface IProps {
-  inputValue: number;
-  setInputValue: (value: number) => void;
+  inputValue: string;
+  setInputValue: (value: string) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
   filteredCurrencies: ICurrencyDataItem[];

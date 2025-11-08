@@ -4,7 +4,7 @@ import { useAppSelector } from "../../services/hooks";
 import type { RootState } from "../../services/store";
 
 const UseCurrencyConvertPannelHooks = () => {
-  const [inputValue, setInputValue] = useState<number>(1);
+  const [inputValue, setInputValue] = useState<string>("1");
   const [searchValue, setSearchValue] = useState<string>("");
   const [debouncedValue, setDebouncedValue] = useState<string>(searchValue);
   const currenciesData: ICurrencyDataItem[] = useAppSelector(

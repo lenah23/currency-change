@@ -4,7 +4,7 @@ import type { RootState } from "../../services/store";
 import styles from "./conversionResults.module.scss";
 
 interface IProps {
-  inputValue: number;
+  inputValue: string;
   trigger: boolean;
 }
 
@@ -19,12 +19,18 @@ const ConversionResults: React.FC<IProps> = (props) => {
 
   const changedResult = useMemo(() => {
     if (rates && lastPair.to?.code) {
-      return props.inputValue * rates[lastPair.to?.code];
+      const normalizedInput = props.inputValue.replace(",", ".");
+      if (
+        !normalizedInput ||
+        normalizedInput === "." ||
+        normalizedInput === ","
+      ) {
+        return 0;
+      }
+      return parseFloat(normalizedInput) * rates[lastPair.to?.code];
     }
     return undefined;
   }, [rates, lastPair.to, lastPair.from, props.inputValue]);
-
-  console.log(inverseRates, "inverseRates")
 
   return (
     <div className={styles["conversation-result__block"]}>

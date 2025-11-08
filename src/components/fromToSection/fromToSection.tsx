@@ -4,8 +4,8 @@ import type { ICurrencyDataItem } from "../../interfaces";
 import styles from "./fromToSection.module.scss";
 
 interface IProps {
-  inputValue: number;
-  setInputValue: (value: number) => void;
+  inputValue: string;
+  setInputValue: (value: string) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
   filteredCurrencies: ICurrencyDataItem[];
