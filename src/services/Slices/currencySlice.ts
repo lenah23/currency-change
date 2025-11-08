@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import type { ICurrencyDataItem } from "../../interfaces";
 import { currenciesData } from "../../utils/currenciesData";
+import { toast } from "react-toastify";
 
 interface CurrencyState {
   currencyList: ICurrencyDataItem[];
@@ -88,8 +89,14 @@ const currencySlice = createSlice({
       .addCase(fetchRates.fulfilled, (state, action) => {
         state.rates = action.payload;
       })
+      .addCase(fetchRates.rejected, () => {
+        toast.error("Smt went wrong! Please, try again");
+      })
       .addCase(fetchInverseRates.fulfilled, (state, action) => {
         state.inverseRates = action.payload;
+      })
+      .addCase(fetchInverseRates.rejected, () => {
+        toast.error("Smt went wrong! Please, try again");
       });
   },
 });
