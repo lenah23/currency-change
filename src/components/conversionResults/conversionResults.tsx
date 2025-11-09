@@ -24,7 +24,7 @@ const ConversionResults: React.FC<IProps> = (props) => {
         <div className={styles["exchange-pair"]}>
           <span className={styles["label"]}>Exchange Rate</span>
           <span className={styles["value"]}>
-            1 {lastPair?.from?.code} = {rates?.[lastPair?.to?.code].toFixed(2)}{" "}
+            1 {lastPair?.from?.code} = {rates?.[lastPair?.to?.code]?.toFixed(2)}{" "}
             {lastPair?.to?.code}
           </span>
         </div>
