@@ -14,7 +14,7 @@ const UseConversionResultsHooks = (props: IProps) => {
   const lastPair = lastPairRaw ? JSON.parse(lastPairRaw) : null;
 
   const changedResult = useMemo(() => {
-    if (rates && lastPair.to?.code) {
+    if (rates && lastPair?.to?.code) {
       const normalizedInput = props.inputValue.replace(",", ".");
       if (
         !normalizedInput ||
@@ -23,10 +23,10 @@ const UseConversionResultsHooks = (props: IProps) => {
       ) {
         return 0;
       }
-      return parseFloat(normalizedInput) * rates[lastPair.to?.code];
+      return parseFloat(normalizedInput) * rates[lastPair?.to?.code];
     }
     return undefined;
-  }, [rates, lastPair.to, lastPair.from, props.inputValue]);
+  }, [rates, lastPair?.to, lastPair?.from, props.inputValue]);
 
   return {lastPair, changedResult, rates, inverseRates};
 };
