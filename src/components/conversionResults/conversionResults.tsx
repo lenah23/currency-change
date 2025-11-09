@@ -32,7 +32,8 @@ const ConversionResults: React.FC<IProps> = (props) => {
           <span className={styles["label"]}>Inverse Rate</span>
           <span className={styles["value"]}>
             1 {lastPair?.to.code} ={" "}
-            {inverseRates?.[lastPair?.from.code].toFixed(5)} {lastPair?.from.code}
+            {inverseRates?.[lastPair?.from.code]?.toFixed(5)}{" "}
+            {lastPair?.from.code}
           </span>
         </div>
       </div>
