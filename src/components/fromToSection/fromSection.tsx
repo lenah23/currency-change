@@ -1,13 +1,10 @@
 import { FromToInput } from "../index";
 import type { Dispatch, SetStateAction } from "react";
-import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import { useAppDispatch } from "../../services/hooks";
+import UseFromToSectionHooks from "./fromToSection.hooks";
 import { handleOpenModal } from "../../services/Slices/modalSlice";
 import { setModalType } from "../../services/Slices/currencySlice";
 import switchIcon from "../../assets/icons/switch-icon.svg";
-import {
-  selectFromCurrency,
-  selectToCurrency,
-} from "../../services/Slices/selectors";
 
 interface IProps {
   role: "openModal" | "choseCurrency";
@@ -21,27 +18,9 @@ interface IProps {
 const FromSection: React.FC<IProps> = (props) => {
   const { setIsSwapped, searchValue, setSearchValue, trigger, setTrigger } =
     props;
-
-  const chosenFromCurrency = useAppSelector(selectFromCurrency);
-  const chosenToCurrency = useAppSelector(selectToCurrency);
-
   const dispatch = useAppDispatch();
-
-  const swapLastRatesPair = () => {
-    const pairStr = localStorage.getItem("LAST_RATES_PAIR");
-    if (!pairStr) return;
-
-    try {
-      const pair = JSON.parse(pairStr);
-      const swappedPair = {
-        from: pair.to,
-        to: pair.from,
-      };
-      localStorage.setItem("LAST_RATES_PAIR", JSON.stringify(swappedPair));
-    } catch (e) {
-      localStorage.removeItem("LAST_RATES_PAIR");
-    }
-  };
+  const { chosenToCurrency, chosenFromCurrency, swapLastRatesPair } =
+    UseFromToSectionHooks();
 
   return (
     <>

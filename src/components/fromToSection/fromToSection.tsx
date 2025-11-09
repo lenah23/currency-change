@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { FromSection, ToSection } from "../index";
 import styles from "./fromToSection.module.scss";
+import UseFromToSectionHooks from "./fromToSection.hooks";
 
 interface IProps {
   inputValue: string;
@@ -12,8 +12,8 @@ interface IProps {
 }
 
 const FromToSection: React.FC<IProps> = (props) => {
-  const [isSwapped, setIsSwapped] = useState<boolean>(false);
   const { searchValue, setSearchValue, trigger } = props;
+  const { isSwapped, setIsSwapped } = UseFromToSectionHooks();
 
   return (
     <div className={styles["from-to-section"]}>

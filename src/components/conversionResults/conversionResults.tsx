@@ -1,37 +1,13 @@
-import { useMemo } from "react";
-import { useAppSelector } from "../../services/hooks";
-import {
-  selectInverseRates,
-  selectRates,
-} from "../../services/Slices/selectors";
+import UseConversionResultsHooks from "./conversionResults.hooks";
 import styles from "./conversionResults.module.scss";
 
 interface IProps {
   inputValue: string;
-  trigger: boolean;
 }
 
 const ConversionResults: React.FC<IProps> = (props) => {
-  const rates = useAppSelector(selectRates);
-  const inverseRates = useAppSelector(selectInverseRates);
-
-  const lastPairRaw = localStorage.getItem("LAST_RATES_PAIR");
-  const lastPair = lastPairRaw ? JSON.parse(lastPairRaw) : null;
-
-  const changedResult = useMemo(() => {
-    if (rates && lastPair.to?.code) {
-      const normalizedInput = props.inputValue.replace(",", ".");
-      if (
-        !normalizedInput ||
-        normalizedInput === "." ||
-        normalizedInput === ","
-      ) {
-        return 0;
-      }
-      return parseFloat(normalizedInput) * rates[lastPair.to?.code];
-    }
-    return undefined;
-  }, [rates, lastPair.to, lastPair.from, props.inputValue]);
+  const { lastPair, changedResult, rates, inverseRates } =
+    UseConversionResultsHooks({ inputValue: props.inputValue });
 
   return (
     <div className={styles["conversation-result__block"]}>

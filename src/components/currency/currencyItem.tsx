@@ -3,13 +3,13 @@ import type { ICurrencyDataItem } from "../../interfaces";
 import styles from "./currency.module.scss";
 
 interface IProps {
-  tabIndex: number;
+  tabIndex?: number;
   isFocused?: boolean;
   isSelected?: boolean;
   currencyItem: ICurrencyDataItem;
   handleClickItem: () => void;
   onFocus?: () => void;
-  itemRef: React.RefObject<HTMLDivElement>;
+  itemRef?: React.RefObject<HTMLDivElement>;
   role: "openModal" | "choseCurrency";
 }
 
