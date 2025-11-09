@@ -26,8 +26,8 @@ const UseCurrencyConvertPannelHooks = () => {
     const search = debouncedValue.toLowerCase();
     const filteredData = currenciesData.filter(
       (currency) =>
-        currency.name.toLowerCase().includes(search) ||
-        currency.code.toLowerCase().includes(search)
+        currency?.name?.toLowerCase().includes(search) ||
+        currency?.code?.toLowerCase().includes(search)
     );
     dispatch(setFilteredCurrencies(filteredData));
   }, [debouncedValue, currenciesData]);

@@ -32,8 +32,8 @@ const CurrencyList: React.FC<IProps> = ({
       {currencyList.length > 0 ? (
         currencyList.map((currency, idx) => {
           const isSelected =
-            (currencyType === "from" && fromValue?.code === currency.code) ||
-            (currencyType === "to" && toValue?.code === currency.code);
+            (currencyType === "from" && fromValue?.code === currency?.code) ||
+            (currencyType === "to" && toValue?.code === currency?.code);
 
           return (
             <CurrencyItem

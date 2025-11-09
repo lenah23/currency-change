@@ -47,8 +47,8 @@ const UseCurrencyExchangeInputHooks = (props: IProps) => {
 
     const fetchAndCacheRates = async () => {
       try {
-        await dispatch(fetchRates(fromValue.code));
-        await dispatch(fetchInverseRates(toValue.code));
+        await dispatch(fetchRates(fromValue?.code));
+        await dispatch(fetchInverseRates(toValue?.code));
 
         if (rates) {
           localStorage.setItem("currencyRates", JSON.stringify(rates));
@@ -63,8 +63,8 @@ const UseCurrencyExchangeInputHooks = (props: IProps) => {
         localStorage.setItem(
           "LAST_RATES_PAIR",
           JSON.stringify({
-            from: fromValue.code,
-            to: toValue.code,
+            from: fromValue?.code,
+            to: toValue?.code,
           })
         );
       } catch (error: unknown) {
@@ -81,11 +81,11 @@ const UseCurrencyExchangeInputHooks = (props: IProps) => {
     ) {
       fetchAndCacheRates();
     } else {
-      dispatch(fetchInverseRates(toValue.code));
+      dispatch(fetchInverseRates(toValue?.code));
       dispatch(setRates(JSON.parse(cachedRates)));
       dispatch(setInverseRates(JSON.parse(cachedInverseRates)));
     }
-  }, [fromValue.code, toValue.code, dispatch]);
+  }, [fromValue?.code, toValue?.code, dispatch]);
 
   useEffect(() => {
     localStorage.setItem(

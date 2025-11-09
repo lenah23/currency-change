@@ -17,23 +17,23 @@ const ConversionResults: React.FC<IProps> = (props) => {
           {lastPair?.to.symbol} {changedResult?.toFixed(2)}{" "}
         </div>
         <div className={styles["from-value"]}>
-          {props.inputValue ? props.inputValue : 1} {lastPair?.from.code} ={" "}
+          {props.inputValue ? props.inputValue : 1} {lastPair?.from?.code} ={" "}
         </div>
       </div>
       <div className={styles["exchange-info"]}>
         <div className={styles["exchange-pair"]}>
           <span className={styles["label"]}>Exchange Rate</span>
           <span className={styles["value"]}>
-            1 {lastPair?.from.code} = {rates?.[lastPair?.to.code].toFixed(2)}{" "}
-            {lastPair?.to.code}
+            1 {lastPair?.from?.code} = {rates?.[lastPair?.to?.code].toFixed(2)}{" "}
+            {lastPair?.to?.code}
           </span>
         </div>
         <div className={styles["exchange-pair"]}>
           <span className={styles["label"]}>Inverse Rate</span>
           <span className={styles["value"]}>
-            1 {lastPair?.to.code} ={" "}
-            {inverseRates?.[lastPair?.from.code]?.toFixed(5)}{" "}
-            {lastPair?.from.code}
+            1 {lastPair?.to?.code} ={" "}
+            {inverseRates?.[lastPair?.from?.code]?.toFixed(5)}{" "}
+            {lastPair?.from?.code}
           </span>
         </div>
       </div>
