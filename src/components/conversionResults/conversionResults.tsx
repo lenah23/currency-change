@@ -14,7 +14,7 @@ const ConversionResults: React.FC<IProps> = (props) => {
       <h2 className={styles["title"]}>Conversion result</h2>
       <div className={styles["result-block"]}>
         <div className={styles["result"]}>
-          {lastPair?.to.symbol} {changedResult?.toFixed(2)}{" "}
+          {lastPair?.to?.symbol} {changedResult?.toFixed(2)}{" "}
         </div>
         <div className={styles["from-value"]}>
           {props.inputValue ? props.inputValue : 1} {lastPair?.from?.code} ={" "}
