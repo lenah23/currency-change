@@ -1,5 +1,5 @@
 import styles from "./button.module.scss";
-import UseButtonHooks from "./button.hooks";
+import UseButtonHooks from "../Button/button.hooks";
 
 interface ButtonProps {
   color: string;

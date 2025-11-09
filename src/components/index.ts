@@ -1,4 +1,4 @@
-import Button from "./button/button";
+import Button from "./Button/button";
 import StatusBar from "./statusBar/statusBar";
 import ToSection from "./fromToSection/toSection";
 import CurrencyItem from "./currency/currencyItem";
